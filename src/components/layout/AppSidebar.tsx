@@ -1,3 +1,4 @@
+
 import { 
   BarChart3, 
   Users, 
@@ -93,7 +94,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                      <NavLink 
                        to={item.url} 
-                       end
+                       end={item.url === `/${user.role}` || item.url === '/portal-cliente'}
                        className={({ isActive }) =>
                          `flex items-center gap-3 px-3 py-2 rounded-lg efika-transition ${
                            isActive 
