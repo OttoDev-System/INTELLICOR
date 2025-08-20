@@ -7,9 +7,11 @@ import {
   Shield, 
   TrendingUp, 
   MessageSquare,
-  UserCheck
+  UserCheck,
+  ChevronRight,
+  Loader2
 } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigation } from 'react-router-dom';
 import {
   Sidebar,
   SidebarContent,
@@ -67,44 +69,54 @@ const getNavItems = (role: string) => {
 export function AppSidebar() {
   const { state } = useSidebar();
   const { user } = useAuth();
+  const navigation = useNavigation();
 
   if (!user) return null;
 
   const navItems = getNavItems(user.role);
   const isCollapsed = state === 'collapsed';
+  const isNavigating = navigation.state === 'loading';
 
   return (
     <Sidebar 
-      className={isCollapsed ? 'w-16' : 'w-64'} 
+      className={`${isCollapsed ? 'w-16' : 'w-64'} bg-sidebar border-sidebar-border efika-transition`} 
       collapsible="icon"
     >
-      <SidebarHeader className="p-6">
+      <SidebarHeader className="p-4 lg:p-6 border-b border-sidebar-border">
         <Logo showText={!isCollapsed} size="md" />
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="py-4">
         <SidebarGroup>
-          <SidebarGroupLabel className={`${isCollapsed ? 'sr-only' : ''} text-black dark:text-white font-medium`}>
+          <SidebarGroupLabel className={`${isCollapsed ? 'sr-only' : ''} text-sidebar-foreground font-medium px-3 mb-2`}>
             {user.role === 'client' ? 'Portal do Cliente' : 'Navegação'}
           </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="space-y-1">
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild className="w-full">
                      <NavLink 
                        to={item.url} 
                        end={item.url === `/${user.role}` || item.url === '/portal-cliente'}
                        className={({ isActive }) =>
-                         `flex items-center gap-3 px-3 py-2 rounded-lg efika-transition ${
+                         `group flex items-center gap-3 px-3 py-2.5 mx-2 rounded-lg efika-transition hover:efika-hover-glow relative ${
                            isActive 
-                             ? 'bg-primary text-primary-foreground font-medium' 
-                             : 'text-black hover:bg-muted hover:text-black dark:text-white dark:hover:text-white'
+                             ? 'bg-sidebar-primary text-sidebar-primary-foreground font-medium shadow-md' 
+                             : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
                          }`
                        }
                      >
-                      <item.icon className="h-4 w-4 shrink-0" />
-                      {!isCollapsed && <span>{item.title}</span>}
+                      <item.icon className={`h-4 w-4 shrink-0 efika-transition ${isNavigating ? 'animate-pulse' : ''}`} />
+                      {!isCollapsed && (
+                        <>
+                          <span className="efika-transition">{item.title}</span>
+                          <ChevronRight className="h-3 w-3 ml-auto opacity-0 group-hover:opacity-100 efika-transition" />
+                        </>
+                      )}
+                      {isNavigating && (
+                        <Loader2 className="h-3 w-3 animate-spin ml-auto" />
+                      )}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

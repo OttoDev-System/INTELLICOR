@@ -126,4 +126,61 @@ All colors MUST be HSL.
   .efika-transition {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  /* Hover Effects */
+  .efika-hover-lift {
+    @apply efika-transition hover:transform hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .efika-hover-glow {
+    @apply efika-transition hover:shadow-lg;
+    box-shadow: 0 4px 24px rgba(13, 33, 79, 0.08);
+  }
+
+  .efika-hover-glow:hover {
+    box-shadow: 0 8px 32px rgba(13, 33, 79, 0.16);
+  }
+
+  /* Loading States */
+  .efika-skeleton {
+    @apply animate-pulse bg-muted rounded;
+  }
+
+  .efika-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Button Loading */
+  .efika-button-loading {
+    @apply relative overflow-hidden;
+  }
+
+  .efika-button-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Focus States */
+  .efika-focus {
+    @apply focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none;
+  }
+
+  /* Mobile Optimizations */
+  @media (max-width: 768px) {
+    .efika-mobile-stack {
+      @apply flex-col space-y-4 space-x-0;
+    }
+    
+    .efika-mobile-full {
+      @apply w-full;
+    }
+  }
 }
