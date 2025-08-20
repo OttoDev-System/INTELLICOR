@@ -48,14 +48,14 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
-    /* Sidebar: Azul Escuro Efika com texto branco */
-    --sidebar-background: 221 85% 19%; /* #0D214F */
-    --sidebar-foreground: 0 0% 98%; /* Texto branco */
-    --sidebar-primary: 0 0% 98%;
-    --sidebar-primary-foreground: 221 85% 19%;
-    --sidebar-accent: 221 85% 25%; /* Versão mais clara para hover */
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 221 85% 15%;
+    /* Sidebar: mesma cor do dashboard com bom contraste */
+    --sidebar-background: 0 0% 100%; /* Mesmo fundo branco do dashboard */
+    --sidebar-foreground: 0 0% 20%; /* Texto escuro para contraste */
+    --sidebar-primary: 221 85% 19%; /* Primary Efika para itens ativos */
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 210 20% 96%; /* Muted para hover */
+    --sidebar-accent-foreground: 0 0% 20%;
+    --sidebar-border: 210 20% 90%;
     --sidebar-ring: 211 100% 50%;
   }
 
@@ -93,14 +93,14 @@ All colors MUST be HSL.
     --input: 0 0% 20%;
     --ring: 211 100% 50%;
 
-    /* Sidebar dark: ainda mais escuro que o primary */
-    --sidebar-background: 221 85% 15%; /* Mais escuro que primary */
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 0 0% 98%;
-    --sidebar-primary-foreground: 221 85% 15%;
-    --sidebar-accent: 221 85% 20%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 221 85% 12%;
+    /* Sidebar dark: mesma cor do dashboard com bom contraste */
+    --sidebar-background: 0 0% 16%; /* Mesmo fundo dos cards (#2a2a2a) */
+    --sidebar-foreground: 0 0% 90%; /* Texto claro para contraste */
+    --sidebar-primary: 221 85% 19%; /* Primary Efika para itens ativos */
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 20%; /* Mais escuro para hover */
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 0 0% 20%;
     --sidebar-ring: 211 100% 50%;
   }
 }
