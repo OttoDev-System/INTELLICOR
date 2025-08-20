@@ -14,7 +14,149 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      clients: {
+        Row: {
+          broker_id: string | null
+          cpf_cnpj: string | null
+          created_at: string | null
+          email: string | null
+          id: string
+          name: string
+          organization_id: string | null
+          phone: string | null
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          broker_id?: string | null
+          cpf_cnpj?: string | null
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          name: string
+          organization_id?: string | null
+          phone?: string | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          broker_id?: string | null
+          cpf_cnpj?: string | null
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          name?: string
+          organization_id?: string | null
+          phone?: string | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clients_broker_id_fkey"
+            columns: ["broker_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "clients_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organizations: {
+        Row: {
+          cnpj: string | null
+          created_at: string | null
+          id: string
+          logo_url: string | null
+          name: string
+          plan: string | null
+          primary_color: string | null
+          secondary_color: string | null
+          status: string | null
+          stripe_customer_id: string | null
+          subdomain: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          cnpj?: string | null
+          created_at?: string | null
+          id?: string
+          logo_url?: string | null
+          name: string
+          plan?: string | null
+          primary_color?: string | null
+          secondary_color?: string | null
+          status?: string | null
+          stripe_customer_id?: string | null
+          subdomain?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          cnpj?: string | null
+          created_at?: string | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+          plan?: string | null
+          primary_color?: string | null
+          secondary_color?: string | null
+          status?: string | null
+          stripe_customer_id?: string | null
+          subdomain?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          email: string
+          id: string
+          name: string
+          organization_id: string | null
+          role: string
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email: string
+          id: string
+          name: string
+          organization_id?: string | null
+          role: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          name?: string
+          organization_id?: string | null
+          role?: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
