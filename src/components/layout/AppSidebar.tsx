@@ -8,10 +8,9 @@ import {
   TrendingUp, 
   MessageSquare,
   UserCheck,
-  ChevronRight,
-  Loader2
+  ChevronRight
 } from 'lucide-react';
-import { NavLink, useNavigation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   Sidebar,
   SidebarContent,
@@ -69,13 +68,11 @@ const getNavItems = (role: string) => {
 export function AppSidebar() {
   const { state } = useSidebar();
   const { user } = useAuth();
-  const navigation = useNavigation();
 
   if (!user) return null;
 
   const navItems = getNavItems(user.role);
   const isCollapsed = state === 'collapsed';
-  const isNavigating = navigation.state === 'loading';
 
   return (
     <Sidebar 
@@ -107,15 +104,12 @@ export function AppSidebar() {
                          }`
                        }
                      >
-                      <item.icon className={`h-4 w-4 shrink-0 efika-transition ${isNavigating ? 'animate-pulse' : ''}`} />
+                      <item.icon className="h-4 w-4 shrink-0 efika-transition" />
                       {!isCollapsed && (
                         <>
                           <span className="efika-transition">{item.title}</span>
                           <ChevronRight className="h-3 w-3 ml-auto opacity-0 group-hover:opacity-100 efika-transition" />
                         </>
-                      )}
-                      {isNavigating && (
-                        <Loader2 className="h-3 w-3 animate-spin ml-auto" />
                       )}
                     </NavLink>
                   </SidebarMenuButton>
