@@ -37,7 +37,7 @@ export default function Landing() {
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Logo />
-          <Button onClick={() => navigate('/auth')} className="efika-gradient">
+          <Button onClick={() => navigate('/auth')} className="intellicor-gradient">
             Acessar Sistema
           </Button>
         </div>
@@ -55,7 +55,7 @@ export default function Landing() {
           <div className="max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold text-primary mb-6">
               Plataforma SaaS para{' '}
-              <span className="efika-gradient bg-clip-text text-transparent">
+              <span className="intellicor-gradient bg-clip-text text-transparent">
                 Corretoras de Seguros
               </span>
             </h1>
@@ -66,15 +66,15 @@ export default function Landing() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="efika-gradient text-lg px-8 efika-transition hover:shadow-lg"
-                onClick={() => navigate('/auth')}
+                className="intellicor-gradient text-lg px-8 intellicor-transition hover:shadow-lg"
+                onClick={() => navigate('/')}
               >
                 Começar Agora
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="text-lg px-8 efika-transition hover:shadow-lg"
+                className="text-lg px-8 intellicor-transition hover:shadow-lg"
               >
                 Agendar Demo
               </Button>
@@ -98,9 +98,9 @@ export default function Landing() {
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {features.map((feature, index) => (
-              <Card key={index} className="efika-card-shadow efika-transition hover:shadow-lg">
+              <Card key={index} className="intellicor-card-shadow intellicor-transition hover:shadow-lg">
                 <CardHeader className="text-center">
-                  <div className="w-16 h-16 mx-auto rounded-lg efika-gradient flex items-center justify-center mb-4">
+                  <div className="w-16 h-16 mx-auto rounded-lg intellicor-gradient flex items-center justify-center mb-4">
                     <feature.icon className="h-8 w-8 text-white" />
                   </div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>
@@ -122,7 +122,7 @@ export default function Landing() {
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <div>
               <h2 className="text-3xl font-bold text-primary mb-6">
-                Por que escolher a Efika?
+                Por que escolher o INTELLICOR?
               </h2>
               <div className="space-y-6">
                 <div className="flex gap-4">
@@ -164,25 +164,25 @@ export default function Landing() {
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
-              <Card className="efika-card-shadow">
+              <Card className="intellicor-card-shadow">
                 <CardContent className="p-6">
                   <div className="text-2xl font-bold text-primary mb-2">500+</div>
                   <div className="text-sm text-muted-foreground">Corretoras atendidas</div>
                 </CardContent>
               </Card>
-              <Card className="efika-card-shadow">
+              <Card className="intellicor-card-shadow">
                 <CardContent className="p-6">
                   <div className="text-2xl font-bold text-accent mb-2">1M+</div>
                   <div className="text-sm text-muted-foreground">Apólices gerenciadas</div>
                 </CardContent>
               </Card>
-              <Card className="efika-card-shadow">
+              <Card className="intellicor-card-shadow">
                 <CardContent className="p-6">
                   <div className="text-2xl font-bold text-success mb-2">99.9%</div>
                   <div className="text-sm text-muted-foreground">Uptime garantido</div>
                 </CardContent>
               </Card>
-              <Card className="efika-card-shadow">
+              <Card className="intellicor-card-shadow">
                 <CardContent className="p-6">
                   <div className="text-2xl font-bold text-secondary mb-2">24/7</div>
                   <div className="text-sm text-muted-foreground">Suporte técnico</div>
@@ -202,12 +202,12 @@ export default function Landing() {
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
               Junte-se a centenas de corretoras que já transformaram 
-              seus negócios com a Efika.
+              seus negócios com o INTELLICOR.
             </p>
             <Button 
               size="lg" 
-              className="efika-gradient text-lg px-8 efika-transition hover:shadow-lg"
-              onClick={() => navigate('/auth')}
+              className="intellicor-gradient text-lg px-8 intellicor-transition hover:shadow-lg"
+              onClick={() => navigate('/')}
             >
               Começar Gratuitamente
             </Button>
@@ -220,7 +220,7 @@ export default function Landing() {
         <div className="container mx-auto text-center">
           <Logo className="justify-center mb-4" />
           <p className="text-muted-foreground">
-            © 2024 Efika Seguros. Todos os direitos reservados.
+            © 2024 INTELLICOR. Todos os direitos reservados.
           </p>
         </div>
       </footer>

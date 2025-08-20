@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
 :root {
-    /* Efika Insurance Brand Colors - Light Mode */
+    /* INTELLICOR Brand Colors - Light Mode */
     --background: 0 0% 100%;
     --foreground: 0 0% 20%; /* #333333 - Grafite escuro para texto */
 
@@ -18,7 +18,7 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 20%;
 
-    /* Primary: Azul Escuro Efika #0D214F */
+    /* Primary: Azul Escuro INTELLICOR #0D214F */
     --primary: 221 85% 19%;
     --primary-foreground: 0 0% 98%;
 
@@ -51,7 +51,7 @@ All colors MUST be HSL.
     /* Sidebar: fundo branco com texto PRETO para máxima legibilidade */
     --sidebar-background: 0 0% 100%; /* Fundo branco */
     --sidebar-foreground: 0 0% 0%; /* Texto PRETO */
-    --sidebar-primary: 221 85% 19%; /* Primary Efika para itens ativos */
+    --sidebar-primary: 221 85% 19%; /* Primary INTELLICOR para itens ativos */
     --sidebar-primary-foreground: 0 0% 98%; /* Texto branco em itens ativos */
     --sidebar-accent: 210 20% 96%; /* Muted para hover */
     --sidebar-accent-foreground: 0 0% 0%; /* Texto PRETO em hover */
@@ -60,7 +60,7 @@ All colors MUST be HSL.
   }
 
 .dark {
-    /* Dark Mode - Mantendo identidade Efika */
+    /* Dark Mode - Mantendo identidade INTELLICOR */
     --background: 0 0% 10%; /* #1a1a1a */
     --foreground: 0 0% 90%; /* #e5e5e5 */
 
@@ -70,7 +70,7 @@ All colors MUST be HSL.
     --popover: 0 0% 16%;
     --popover-foreground: 0 0% 90%;
 
-    /* Manter cores Efika no dark mode */
+    /* Manter cores INTELLICOR no dark mode */
     --primary: 221 85% 19%; /* #0D214F - mantém identidade */
     --primary-foreground: 0 0% 98%;
 
@@ -96,7 +96,7 @@ All colors MUST be HSL.
     /* Sidebar dark: fundo escuro com texto BRANCO para máxima legibilidade */
     --sidebar-background: 0 0% 16%; /* Fundo escuro */
     --sidebar-foreground: 0 0% 100%; /* Texto BRANCO */
-    --sidebar-primary: 221 85% 19%; /* Primary Efika para itens ativos */
+    --sidebar-primary: 221 85% 19%; /* Primary INTELLICOR para itens ativos */
     --sidebar-primary-foreground: 0 0% 98%; /* Texto branco em itens ativos */
     --sidebar-accent: 0 0% 20%; /* Mais escuro para hover */
     --sidebar-accent-foreground: 0 0% 100%; /* Texto BRANCO em hover */
@@ -115,49 +115,49 @@ All colors MUST be HSL.
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
-  .efika-gradient {
+  .intellicor-gradient {
     background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
   }
 
-  .efika-card-shadow {
+  .intellicor-card-shadow {
     box-shadow: 0 4px 24px rgba(13, 33, 79, 0.08);
   }
 
-  .efika-transition {
+  .intellicor-transition {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Hover Effects */
-  .efika-hover-lift {
-    @apply efika-transition hover:transform hover:-translate-y-1 hover:shadow-lg;
+  .intellicor-hover-lift {
+    @apply intellicor-transition hover:transform hover:-translate-y-1 hover:shadow-lg;
   }
 
-  .efika-hover-glow {
-    @apply efika-transition hover:shadow-lg;
+  .intellicor-hover-glow {
+    @apply intellicor-transition hover:shadow-lg;
     box-shadow: 0 4px 24px rgba(13, 33, 79, 0.08);
   }
 
-  .efika-hover-glow:hover {
+  .intellicor-hover-glow:hover {
     box-shadow: 0 8px 32px rgba(13, 33, 79, 0.16);
   }
 
   /* Loading States */
-  .efika-skeleton {
+  .intellicor-skeleton {
     @apply animate-pulse bg-muted rounded;
   }
 
-  .efika-shimmer {
+  .intellicor-shimmer {
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
     background-size: 200px 100%;
     animation: shimmer 1.5s infinite;
   }
 
   /* Button Loading */
-  .efika-button-loading {
+  .intellicor-button-loading {
     @apply relative overflow-hidden;
   }
 
-  .efika-button-loading::after {
+  .intellicor-button-loading::after {
     content: '';
     position: absolute;
     top: 0;
@@ -169,17 +169,17 @@ All colors MUST be HSL.
   }
 
   /* Focus States */
-  .efika-focus {
+  .intellicor-focus {
     @apply focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none;
   }
 
   /* Mobile Optimizations */
   @media (max-width: 768px) {
-    .efika-mobile-stack {
+    .intellicor-mobile-stack {
       @apply flex-col space-y-4 space-x-0;
     }
     
-    .efika-mobile-full {
+    .intellicor-mobile-full {
       @apply w-full;
     }
   }

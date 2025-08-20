@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import Landing from "./pages/Landing";
+import SaasLanding from "./pages/SaasLanding";
+import Onboarding from "./pages/Onboarding";
+import OnboardingSuccess from "./pages/OnboardingSuccess";
 import Login from "./pages/auth/Login";
 
 // Admin Pages
@@ -128,7 +131,11 @@ function AppRoutes() {
   // Routes for non-authenticated users
   return (
     <Routes>
-      <Route path="/" element={<Landing />} />
+      <Route path="/" element={<SaasLanding />} />
+      <Route path="/saas" element={<SaasLanding />} />
+      <Route path="/sistema" element={<Landing />} />
+      <Route path="/onboarding" element={<Onboarding />} />
+      <Route path="/onboarding/success" element={<OnboardingSuccess />} />
       <Route path="/auth" element={<Login />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
