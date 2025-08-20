@@ -89,7 +89,7 @@ export function Header() {
                   className="relative h-8 w-8 lg:h-10 lg:w-10 rounded-full efika-transition hover:scale-105 efika-hover-glow"
                 >
                   <Avatar className="h-8 w-8 lg:h-10 lg:w-10">
-                    <AvatarImage src={user.avatar} alt={user.name} />
+                    <AvatarImage src={user.avatar_url} alt={user.name} />
                     <AvatarFallback className="bg-primary text-primary-foreground font-medium">
                       {user.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>

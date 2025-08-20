@@ -1,103 +1,159 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+import type { User } from '@supabase/supabase-js';
 
 export type UserRole = 'admin' | 'broker' | 'support' | 'client';
 
-export interface User {
+export interface UserProfile {
   id: string;
   name: string;
   email: string;
   role: UserRole;
-  avatar?: string;
-  company?: string;
+  organization_id: string;
+  status: 'active' | 'inactive';
+  avatar_url?: string;
+  organization?: {
+    id: string;
+    name: string;
+    subdomain: string;
+    plan: string;
+    status: string;
+    primary_color: string;
+    secondary_color: string;
+  };
 }
 
 interface AuthContextType {
-  user: User | null;
-  login: (email: string, password: string, userType: 'staff' | 'client') => Promise<boolean>;
+  user: UserProfile | null;
+  login: (email: string, password: string, userType?: 'staff' | 'client') => Promise<void>;
   logout: () => void;
   isLoading: boolean;
+  supabaseUser: User | null;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Mock users for demonstration
-const mockUsers: User[] = [
-  {
-    id: '1',
-    name: 'Ana Silva',
-    email: 'ana@efika.com.br',
-    role: 'admin',
-    avatar: 'AS',
-    company: 'Efika Seguros'
-  },
-  {
-    id: '2',
-    name: 'Carlos Santos',
-    email: 'carlos@efika.com.br',
-    role: 'broker',
-    avatar: 'CS',
-    company: 'Efika Seguros'
-  },
-  {
-    id: '3',
-    name: 'Maria Oliveira',
-    email: 'maria@efika.com.br',
-    role: 'support',
-    avatar: 'MO',
-    company: 'Efika Seguros'
-  },
-  {
-    id: '4',
-    name: 'João Costa',
-    email: 'joao.costa@gmail.com',
-    role: 'client',
-    avatar: 'JC',
-    company: 'Cliente Efika'
-  }
-];
-
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserProfile | null>(null);
+  const [supabaseUser, setSupabaseUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { toast } = useToast();
 
   useEffect(() => {
-    // Check for stored user on mount
-    const storedUser = localStorage.getItem('efika_user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setIsLoading(false);
-  }, []);
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSupabaseUser(session?.user ?? null);
+      if (session?.user) {
+        loadUserProfile(session.user.id);
+      } else {
+        setIsLoading(false);
+      }
+    });
 
-  const login = async (email: string, password: string, userType: 'staff' | 'client'): Promise<boolean> => {
-    setIsLoading(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    const foundUser = mockUsers.find(u => 
-      u.email === email && 
-      (userType === 'staff' ? u.role !== 'client' : u.role === 'client')
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        setSupabaseUser(session?.user ?? null);
+        
+        if (session?.user) {
+          await loadUserProfile(session.user.id);
+        } else {
+          setUser(null);
+          setIsLoading(false);
+        }
+      }
     );
 
-    if (foundUser && password === 'demo123') {
-      setUser(foundUser);
-      localStorage.setItem('efika_user', JSON.stringify(foundUser));
-      setIsLoading(false);
-      return true;
-    }
+    return () => subscription.unsubscribe();
+  }, []);
 
-    setIsLoading(false);
-    return false;
+  const loadUserProfile = async (userId: string) => {
+    try {
+      const { data: profile, error } = await supabase
+        .from('profiles')
+        .select(`
+          *,
+          organization:organizations(*)
+        `)
+        .eq('id', userId)
+        .single();
+
+      if (error) {
+        console.error('Error loading profile:', error);
+        toast({
+          title: "Erro ao carregar perfil",
+          description: "Não foi possível carregar os dados do usuário",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Type assertion to fix role type from database
+      const typedProfile: UserProfile = {
+        ...profile,
+        role: profile.role as UserRole,
+        status: profile.status as 'active' | 'inactive'
+      };
+
+      setUser(typedProfile);
+    } catch (error) {
+      console.error('Error in loadUserProfile:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('efika_user');
+  const login = async (email: string, password: string, userType?: 'staff' | 'client') => {
+    setIsLoading(true);
+    
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      // Profile will be loaded by the auth state change listener
+      toast({
+        title: "Login realizado com sucesso!",
+        description: `Bem-vindo ao INTELLICOR`,
+      });
+    } catch (error: any) {
+      setIsLoading(false);
+      throw new Error(error.message || 'Erro ao fazer login');
+    }
+  };
+
+  const logout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        throw error;
+      }
+
+      setUser(null);
+      setSupabaseUser(null);
+      
+      toast({
+        title: "Logout realizado",
+        description: "Você foi desconectado com sucesso",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Erro ao fazer logout",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading }}>
+    <AuthContext.Provider value={{ user, login, logout, isLoading, supabaseUser }}>
       {children}
     </AuthContext.Provider>
   );

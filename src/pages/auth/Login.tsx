@@ -36,16 +36,11 @@ export default function Login() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      const success = await login(data.email, data.password, userType);
-      
-      if (success) {
-        toast.success('Login realizado com sucesso!');
-        // Redirect based on user type will be handled by App.tsx
-      } else {
-        toast.error('Credenciais inválidas. Use email: ana@efika.com.br, senha: demo123');
-      }
-    } catch (error) {
-      toast.error('Erro ao fazer login');
+      await login(data.email, data.password, userType);
+      toast.success('Login realizado com sucesso!');
+      // Redirect will be handled by App.tsx based on user role
+    } catch (error: any) {
+      toast.error(error.message || 'Erro ao fazer login');
     }
   };
 
@@ -55,14 +50,14 @@ export default function Login() {
         <div className="text-center mb-8">
           <Logo size="lg" className="justify-center mb-4" />
           <h1 className="text-2xl font-bold text-primary">
-            Bem-vindo à Efika
+            Bem-vindo ao INTELLICOR
           </h1>
           <p className="text-muted-foreground">
             Faça login para acessar sua conta
           </p>
         </div>
 
-        <Card className="efika-card-shadow">
+        <Card className="intellicor-card-shadow">
           <CardHeader className="pb-4">
             <Tabs value={userType} onValueChange={(value) => setUserType(value as 'staff' | 'client')}>
               <TabsList className="grid w-full grid-cols-2">
@@ -76,12 +71,12 @@ export default function Login() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder={userType === 'staff' ? 'usuario@efika.com.br' : 'cliente@exemplo.com'}
-                  {...form.register('email')}
-                />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder={userType === 'staff' ? 'usuario@intellicor.com.br' : 'cliente@exemplo.com'}
+                    {...form.register('email')}
+                  />
                 {form.formState.errors.email && (
                   <p className="text-sm text-destructive">
                     {form.formState.errors.email.message}
@@ -121,7 +116,7 @@ export default function Login() {
 
               <Button 
                 type="submit" 
-                className="w-full efika-gradient hover:opacity-90 efika-transition"
+                className="w-full intellicor-gradient hover:opacity-90 intellicor-transition"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -136,12 +131,12 @@ export default function Login() {
             </form>
 
             <div className="mt-6 p-4 bg-muted/50 rounded-lg">
-              <p className="text-sm font-medium text-center mb-2">Contas de Demonstração:</p>
+              <p className="text-sm font-medium text-center mb-2">Contas de Teste:</p>
               <div className="space-y-2 text-xs text-muted-foreground">
-                <div><strong>Admin:</strong> ana@efika.com.br</div>
-                <div><strong>Corretor:</strong> carlos@efika.com.br</div>
-                <div><strong>Suporte:</strong> maria@efika.com.br</div>
-                <div><strong>Cliente:</strong> joao.costa@gmail.com</div>
+                <div><strong>Admin:</strong> admin@demo.com</div>
+                <div><strong>Corretor:</strong> corretor@demo.com</div>
+                <div><strong>Suporte:</strong> suporte@demo.com</div>
+                <div><strong>Cliente:</strong> cliente@demo.com</div>
                 <div className="text-center mt-2 font-medium">Senha: <code>demo123</code></div>
               </div>
             </div>

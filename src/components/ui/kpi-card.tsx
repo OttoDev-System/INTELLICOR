@@ -9,6 +9,8 @@ interface KPICardProps {
   change?: string;
   changeType?: 'positive' | 'negative' | 'neutral';
   className?: string;
+  loading?: boolean;
+  description?: string;
 }
 
 export function KPICard({ 
@@ -17,7 +19,9 @@ export function KPICard({
   icon: Icon, 
   change, 
   changeType = 'neutral',
-  className 
+  className,
+  loading = false,
+  description
 }: KPICardProps) {
   const changeColor = {
     positive: 'text-success',
@@ -34,11 +38,16 @@ export function KPICard({
               {title}
             </p>
             <p className="text-2xl font-bold text-foreground mt-2">
-              {value}
+              {loading ? '--' : value}
             </p>
             {change && (
               <p className={cn("text-xs mt-1", changeColor[changeType])}>
                 {change}
+              </p>
+            )}
+            {description && (
+              <p className="text-xs text-muted-foreground mt-1">
+                {description}
               </p>
             )}
           </div>

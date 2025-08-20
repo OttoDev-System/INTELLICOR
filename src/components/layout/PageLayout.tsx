@@ -12,6 +12,7 @@ interface PageLayoutProps {
     onClick: () => void;
     loading?: boolean;
     variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
+    icon?: React.ComponentType<any>;
   };
   secondaryActions?: Array<{
     label: string;
@@ -85,6 +86,7 @@ export function PageLayout({
               {primaryAction.loading && (
                 <Loader2 className="h-4 w-4 animate-spin mr-2" />
               )}
+              {primaryAction.icon && <primaryAction.icon className="h-4 w-4 mr-2" />}
               {primaryAction.label}
             </Button>
           )}

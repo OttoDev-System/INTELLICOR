@@ -12,6 +12,8 @@ import { Progress } from '@/components/ui/progress';
 import { Logo } from '@/components/ui/logo';
 import { Upload, Building2, Mail, Lock, User, Globe, Palette } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const onboardingSchema = z.object({
   // Dados da Corretora
@@ -38,6 +40,7 @@ type OnboardingFormData = z.infer<typeof onboardingSchema>;
 
 export default function Onboarding() {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(1);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const totalSteps = 4;
@@ -69,14 +72,84 @@ export default function Onboarding() {
   };
 
   const onSubmit = async (data: OnboardingFormData) => {
-    console.log('Onboarding data:', data);
-    console.log('Logo file:', logoFile);
-    
-    // Aqui seria feita a integração com Supabase
-    // Por enquanto, simula sucesso
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    navigate('/onboarding/success');
+    try {
+      // 1. Criar usuário no Auth
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: data.adminEmail,
+        password: data.adminPassword,
+        options: {
+          emailRedirectTo: `${window.location.origin}/onboarding/success`
+        }
+      });
+
+      if (authError) throw authError;
+
+      if (!authData.user) {
+        throw new Error('Erro ao criar usuário');
+      }
+
+      // 2. Criar organização
+      const { data: org, error: orgError } = await supabase
+        .from('organizations')
+        .insert({
+          name: data.companyName,
+          cnpj: data.cnpj,
+          subdomain: data.subdomain,
+          primary_color: data.primaryColor,
+        })
+        .select()
+        .single();
+
+      if (orgError) throw orgError;
+
+      // 3. Criar profile do admin
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .insert({
+          id: authData.user.id,
+          organization_id: org.id,
+          name: data.adminName,
+          email: data.adminEmail,
+          role: 'admin',
+        });
+
+      if (profileError) throw profileError;
+
+      // 4. Upload logo se fornecido
+      if (logoFile) {
+        const fileExt = logoFile.name.split('.').pop();
+        const fileName = `${org.id}/logo.${fileExt}`;
+        
+        const { error: uploadError } = await supabase.storage
+          .from('logos')
+          .upload(fileName, logoFile);
+
+        if (!uploadError) {
+          // Atualizar organização com URL do logo
+          const { data: { publicUrl } } = supabase.storage
+            .from('logos')
+            .getPublicUrl(fileName);
+
+          await supabase
+            .from('organizations')
+            .update({ logo_url: publicUrl })
+            .eq('id', org.id);
+        }
+      }
+
+      toast({
+        title: "Organização criada com sucesso!",
+        description: "Verifique seu email para confirmar a conta.",
+      });
+
+      navigate('/onboarding/success');
+    } catch (error: any) {
+      toast({
+        title: "Erro no cadastro",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
   };
 
   const nextStep = () => {
