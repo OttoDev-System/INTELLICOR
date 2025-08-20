@@ -1,4 +1,4 @@
-import { Bell, LogOut, User } from 'lucide-react';
+import { Bell, LogOut, User, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -12,6 +12,7 @@ import {
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useAuth } from '@/contexts/AuthContext';
 import { Badge } from '@/components/ui/badge';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 const roleLabels = {
   admin: 'Administrador',
@@ -22,6 +23,7 @@ const roleLabels = {
 
 export function Header() {
   const { user, logout } = useAuth();
+  const { theme, setTheme } = useTheme();
 
   if (!user) return null;
 
@@ -36,6 +38,16 @@ export function Header() {
           <Badge variant="secondary" className="hidden md:inline-flex">
             {roleLabels[user.role]}
           </Badge>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          >
+            <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Alternar tema</span>
+          </Button>
 
           <Button variant="ghost" size="icon" className="relative">
             <Bell className="h-4 w-4" />
