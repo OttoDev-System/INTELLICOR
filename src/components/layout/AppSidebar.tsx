@@ -83,7 +83,7 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className={isCollapsed ? 'sr-only' : ''}>
+          <SidebarGroupLabel className={`${isCollapsed ? 'sr-only' : ''} text-black dark:text-white font-medium`}>
             {user.role === 'client' ? 'Portal do Cliente' : 'Navegação'}
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -97,8 +97,8 @@ export function AppSidebar() {
                        className={({ isActive }) =>
                          `flex items-center gap-3 px-3 py-2 rounded-lg efika-transition ${
                            isActive 
-                             ? 'bg-sidebar-primary text-sidebar-primary-foreground font-medium' 
-                             : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                             ? 'bg-primary text-primary-foreground font-medium' 
+                             : 'text-black hover:bg-muted hover:text-black dark:text-white dark:hover:text-white'
                          }`
                        }
                      >
