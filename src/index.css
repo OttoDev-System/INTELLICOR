@@ -48,13 +48,13 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
-    /* Sidebar: mesma cor do dashboard com bom contraste */
-    --sidebar-background: 0 0% 100%; /* Mesmo fundo branco do dashboard */
-    --sidebar-foreground: 0 0% 20%; /* Texto escuro para contraste */
+    /* Sidebar: fundo branco com texto PRETO para máxima legibilidade */
+    --sidebar-background: 0 0% 100%; /* Fundo branco */
+    --sidebar-foreground: 0 0% 0%; /* Texto PRETO */
     --sidebar-primary: 221 85% 19%; /* Primary Efika para itens ativos */
-    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 98%; /* Texto branco em itens ativos */
     --sidebar-accent: 210 20% 96%; /* Muted para hover */
-    --sidebar-accent-foreground: 0 0% 20%;
+    --sidebar-accent-foreground: 0 0% 0%; /* Texto PRETO em hover */
     --sidebar-border: 210 20% 90%;
     --sidebar-ring: 211 100% 50%;
   }
@@ -93,13 +93,13 @@ All colors MUST be HSL.
     --input: 0 0% 20%;
     --ring: 211 100% 50%;
 
-    /* Sidebar dark: mesma cor do dashboard com bom contraste */
-    --sidebar-background: 0 0% 16%; /* Mesmo fundo dos cards (#2a2a2a) */
-    --sidebar-foreground: 0 0% 90%; /* Texto claro para contraste */
+    /* Sidebar dark: fundo escuro com texto BRANCO para máxima legibilidade */
+    --sidebar-background: 0 0% 16%; /* Fundo escuro */
+    --sidebar-foreground: 0 0% 100%; /* Texto BRANCO */
     --sidebar-primary: 221 85% 19%; /* Primary Efika para itens ativos */
-    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 98%; /* Texto branco em itens ativos */
     --sidebar-accent: 0 0% 20%; /* Mais escuro para hover */
-    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-accent-foreground: 0 0% 100%; /* Texto BRANCO em hover */
     --sidebar-border: 0 0% 20%;
     --sidebar-ring: 211 100% 50%;
   }

@@ -91,17 +91,17 @@ export function AppSidebar() {
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <NavLink 
-                      to={item.url} 
-                      end
-                      className={({ isActive }) =>
-                        `flex items-center gap-3 px-3 py-2 rounded-lg efika-transition ${
-                          isActive 
-                            ? 'bg-accent text-accent-foreground font-medium' 
-                            : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                        }`
-                      }
-                    >
+                     <NavLink 
+                       to={item.url} 
+                       end
+                       className={({ isActive }) =>
+                         `flex items-center gap-3 px-3 py-2 rounded-lg efika-transition ${
+                           isActive 
+                             ? 'bg-sidebar-primary text-sidebar-primary-foreground font-medium' 
+                             : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                         }`
+                       }
+                     >
                       <item.icon className="h-4 w-4 shrink-0" />
                       {!isCollapsed && <span>{item.title}</span>}
                     </NavLink>
