@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
@@ -48,13 +48,16 @@ export default function Onboarding() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
     watch,
     setValue
   } = useForm<OnboardingFormData>({
     resolver: zodResolver(onboardingSchema),
     defaultValues: {
-      primaryColor: '#0D214F'
+      primaryColor: '#0D214F',
+      acceptTerms: false,
+      acceptLGPD: false
     }
   });
 
@@ -423,9 +426,16 @@ export default function Onboarding() {
                 <CardContent className="space-y-6">
                   <div className="space-y-4">
                     <div className="flex items-start gap-2">
-                      <Checkbox
-                        id="acceptTerms"
-                        {...register('acceptTerms')}
+                      <Controller
+                        name="acceptTerms"
+                        control={control}
+                        render={({ field }) => (
+                          <Checkbox
+                            id="acceptTerms"
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        )}
                       />
                       <Label htmlFor="acceptTerms" className="text-sm leading-relaxed cursor-pointer">
                         Aceito os <span className="text-primary underline">Termos de Uso</span> e 
@@ -437,9 +447,16 @@ export default function Onboarding() {
                     )}
 
                     <div className="flex items-start gap-2">
-                      <Checkbox
-                        id="acceptLGPD"
-                        {...register('acceptLGPD')}
+                      <Controller
+                        name="acceptLGPD"
+                        control={control}
+                        render={({ field }) => (
+                          <Checkbox
+                            id="acceptLGPD"
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        )}
                       />
                       <Label htmlFor="acceptLGPD" className="text-sm leading-relaxed cursor-pointer">
                         Autorizo o tratamento dos meus dados pessoais de acordo com a 
