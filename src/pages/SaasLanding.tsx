@@ -5,114 +5,70 @@ import { Badge } from '@/components/ui/badge';
 import { Logo } from '@/components/ui/logo';
 import { useNavigate } from 'react-router-dom';
 import heroImage from '@/assets/hero-image.jpg';
-
 export default function SaasLanding() {
   const navigate = useNavigate();
-
-  const features = [
-    {
-      icon: Brain,
-      title: 'IA Integrada',
-      description: 'Análise inteligente de leads e automação de processos com inteligência artificial.'
-    },
-    {
-      icon: Globe,
-      title: 'Landing Pages White-Label',
-      description: 'Páginas personalizadas para cada corretora com domínio próprio incluído.'
-    },
-    {
-      icon: Shield,
-      title: 'Sistema Completo',
-      description: 'CRM, gestão de apólices, dashboards e documentos em uma plataforma única.'
-    },
-    {
-      icon: Users,
-      title: 'Multi-Tenancy',
-      description: 'Gestão completa de múltiplas corretoras com isolamento total de dados.'
-    }
-  ];
-
-  const plans = [
-    {
-      name: 'BÁSICO',
-      price: 'R$ 297',
-      period: '/mês',
-      description: 'Ideal para corretoras iniciando a digitalização',
-      features: [
-        'Sistema completo de gestão',
-        'Subdomain personalizado',
-        'Até 500 clientes',
-        'Dashboard básico',
-        'Suporte por email',
-        'Relatórios essenciais'
-      ],
-      badge: '',
-      ctaText: 'Escolher Básico',
-      ctaVariant: 'outline' as const
-    },
-    {
-      name: 'PRO',
-      price: 'R$ 597',
-      period: '/mês',
-      description: 'Para corretoras que querem crescer com IA',
-      features: [
-        'Tudo do Básico',
-        'Landing page personalizada',
-        'IA para análise de leads',
-        'Até 2.000 clientes',
-        'Dashboards avançados',
-        'Suporte prioritário',
-        'API completa',
-        'Automações inteligentes'
-      ],
-      badge: 'MAIS POPULAR',
-      ctaText: 'Escolher Pro',
-      ctaVariant: 'default' as const
-    },
-    {
-      name: 'ENTERPRISE',
-      price: 'R$ 997',
-      period: '/mês',
-      description: 'Solução completa para grandes corretoras',
-      features: [
-        'Tudo do Pro',
-        'Domínio próprio',
-        'White-label completo',
-        'Clientes ilimitados',
-        'IA avançada personalizada',
-        'Suporte dedicado',
-        'Integração customizada',
-        'Treinamento incluso'
-      ],
-      badge: 'PREMIUM',
-      ctaText: 'Falar com Especialista',
-      ctaVariant: 'secondary' as const
-    }
-  ];
-
-  const testimonials = [
-    {
-      name: 'Carlos Silva',
-      company: 'Silva Seguros',
-      content: 'Aumentamos nossa conversão em 180% com as landing pages personalizadas do INTELLICOR.',
-      rating: 5
-    },
-    {
-      name: 'Maria Santos',
-      company: 'Santos Corretora',
-      content: 'A IA do sistema identifica os melhores leads automaticamente. Revolucionou nosso processo!',
-      rating: 5
-    },
-    {
-      name: 'João Oliveira',
-      company: 'Oliveira & Associados',
-      content: 'White-label perfeito! Nossos clientes nem sabem que usamos INTELLICOR. Profissional total.',
-      rating: 5
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
+  const features = [{
+    icon: Brain,
+    title: 'IA Integrada',
+    description: 'Análise inteligente de leads e automação de processos com inteligência artificial.'
+  }, {
+    icon: Globe,
+    title: 'Landing Pages White-Label',
+    description: 'Páginas personalizadas para cada corretora com domínio próprio incluído.'
+  }, {
+    icon: Shield,
+    title: 'Sistema Completo',
+    description: 'CRM, gestão de apólices, dashboards e documentos em uma plataforma única.'
+  }, {
+    icon: Users,
+    title: 'Multi-Tenancy',
+    description: 'Gestão completa de múltiplas corretoras com isolamento total de dados.'
+  }];
+  const plans = [{
+    name: 'BÁSICO',
+    price: 'R$ 297',
+    period: '/mês',
+    description: 'Ideal para corretoras iniciando a digitalização',
+    features: ['Sistema completo de gestão', 'Subdomain personalizado', 'Até 500 clientes', 'Dashboard básico', 'Suporte por email', 'Relatórios essenciais'],
+    badge: '',
+    ctaText: 'Escolher Básico',
+    ctaVariant: 'outline' as const
+  }, {
+    name: 'PRO',
+    price: 'R$ 597',
+    period: '/mês',
+    description: 'Para corretoras que querem crescer com IA',
+    features: ['Tudo do Básico', 'Landing page personalizada', 'IA para análise de leads', 'Até 2.000 clientes', 'Dashboards avançados', 'Suporte prioritário', 'API completa', 'Automações inteligentes'],
+    badge: 'MAIS POPULAR',
+    ctaText: 'Escolher Pro',
+    ctaVariant: 'default' as const
+  }, {
+    name: 'ENTERPRISE',
+    price: 'R$ 997',
+    period: '/mês',
+    description: 'Solução completa para grandes corretoras',
+    features: ['Tudo do Pro', 'Domínio próprio', 'White-label completo', 'Clientes ilimitados', 'IA avançada personalizada', 'Suporte dedicado', 'Integração customizada', 'Treinamento incluso'],
+    badge: 'PREMIUM',
+    ctaText: 'Falar com Especialista',
+    ctaVariant: 'secondary' as const
+  }];
+  const testimonials = [{
+    name: 'Carlos Silva',
+    company: 'Silva Seguros',
+    content: 'Aumentamos nossa conversão em 180% com as landing pages personalizadas do INTELLICOR.',
+    rating: 5
+  }, {
+    name: 'Maria Santos',
+    company: 'Santos Corretora',
+    content: 'A IA do sistema identifica os melhores leads automaticamente. Revolucionou nosso processo!',
+    rating: 5
+  }, {
+    name: 'João Oliveira',
+    company: 'Oliveira & Associados',
+    content: 'White-label perfeito! Nossos clientes nem sabem que usamos INTELLICOR. Profissional total.',
+    rating: 5
+  }];
+  return <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -130,18 +86,15 @@ export default function SaasLanding() {
 
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-5"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-5" style={{
+        backgroundImage: `url(${heroImage})`
+      }} />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 to-background/80" />
         
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-4xl mx-auto">
-            <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm">
-              🚀 A Plataforma que Revoluciona sua Corretora
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold text-primary mb-6">
+            
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-slate-300">
               INTELLICOR - A {' '}
               <span className="intellicor-gradient bg-clip-text text-transparent">
                 Corretagem Inteligente
@@ -152,19 +105,11 @@ export default function SaasLanding() {
               Tudo que sua corretora precisa para dominar o mercado digital.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="intellicor-gradient text-lg px-8 intellicor-transition hover:shadow-lg"
-                onClick={() => navigate('#planos')}
-              >
+              <Button size="lg" className="intellicor-gradient text-lg px-8 intellicor-transition hover:shadow-lg" onClick={() => navigate('#planos')}>
                 <Zap className="mr-2 h-5 w-5" />
                 Escolher Plano
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="text-lg px-8 intellicor-transition hover:shadow-lg"
-              >
+              <Button size="lg" variant="outline" className="text-lg px-8 intellicor-transition hover:shadow-lg">
                 Ver Demo Grátis
               </Button>
             </div>
@@ -186,8 +131,7 @@ export default function SaasLanding() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {features.map((feature, index) => (
-              <Card key={index} className="intellicor-card-shadow intellicor-transition hover:shadow-lg border-0">
+            {features.map((feature, index) => <Card key={index} className="intellicor-card-shadow intellicor-transition hover:shadow-lg border-0">
                 <CardHeader className="text-center">
                   <div className="w-16 h-16 mx-auto rounded-lg intellicor-gradient flex items-center justify-center mb-4">
                     <feature.icon className="h-8 w-8 text-white" />
@@ -199,8 +143,7 @@ export default function SaasLanding() {
                     {feature.description}
                   </CardDescription>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -209,7 +152,7 @@ export default function SaasLanding() {
       <section id="planos" className="py-20 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-primary mb-4">
+            <h2 className="text-3xl font-bold mb-4 text-slate-200">
               Planos que Cabem no seu Bolso
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -219,23 +162,14 @@ export default function SaasLanding() {
           </div>
 
           <div className="grid gap-8 lg:grid-cols-3 max-w-6xl mx-auto">
-            {plans.map((plan, index) => (
-              <Card key={index} className={`intellicor-card-shadow intellicor-transition hover:shadow-xl relative ${
-                plan.badge === 'MAIS POPULAR' ? 'border-primary ring-2 ring-primary/20 scale-105' : ''
-              }`}>
-                {plan.badge && (
-                  <Badge 
-                    className={`absolute -top-3 left-1/2 transform -translate-x-1/2 px-4 py-1 ${
-                      plan.badge === 'MAIS POPULAR' ? 'bg-primary' : 'bg-secondary'
-                    }`}
-                  >
+            {plans.map((plan, index) => <Card key={index} className={`intellicor-card-shadow intellicor-transition hover:shadow-xl relative ${plan.badge === 'MAIS POPULAR' ? 'border-primary ring-2 ring-primary/20 scale-105' : ''}`}>
+                {plan.badge && <Badge className={`absolute -top-3 left-1/2 transform -translate-x-1/2 px-4 py-1 ${plan.badge === 'MAIS POPULAR' ? 'bg-primary' : 'bg-secondary'}`}>
                     {plan.badge}
-                  </Badge>
-                )}
+                  </Badge>}
                 <CardHeader className="text-center pb-6">
                   <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
                   <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-4xl font-bold text-primary">{plan.price}</span>
+                    <span className="text-4xl font-bold text-gray-300">{plan.price}</span>
                     <span className="text-muted-foreground">{plan.period}</span>
                   </div>
                   <CardDescription className="text-base">
@@ -244,24 +178,17 @@ export default function SaasLanding() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <ul className="space-y-3">
-                    {plan.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
+                    {plan.features.map((feature, idx) => <li key={idx} className="flex items-start gap-2">
                         <Check className="h-5 w-5 text-success shrink-0 mt-0.5" />
                         <span className="text-sm">{feature}</span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
-                  <Button 
-                    className="w-full h-12" 
-                    variant={plan.ctaVariant}
-                    onClick={() => console.log(`Escolheu plano: ${plan.name}`)}
-                  >
+                  <Button className="w-full h-12" variant={plan.ctaVariant} onClick={() => console.log(`Escolheu plano: ${plan.name}`)}>
                     {plan.ctaText}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -279,13 +206,10 @@ export default function SaasLanding() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="intellicor-card-shadow">
+            {testimonials.map((testimonial, index) => <Card key={index} className="intellicor-card-shadow">
                 <CardContent className="p-6">
                   <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                    ))}
+                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />)}
                   </div>
                   <p className="text-muted-foreground mb-4 italic">
                     "{testimonial.content}"
@@ -295,8 +219,7 @@ export default function SaasLanding() {
                     <div className="text-sm text-muted-foreground">{testimonial.company}</div>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -313,18 +236,10 @@ export default function SaasLanding() {
               com INTELLICOR. Comece hoje mesmo!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="intellicor-gradient text-lg px-8 intellicor-transition hover:shadow-lg"
-                onClick={() => navigate('#planos')}
-              >
+              <Button size="lg" className="intellicor-gradient text-lg px-8 intellicor-transition hover:shadow-lg" onClick={() => navigate('#planos')}>
                 Começar Agora - Teste Grátis
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="text-lg px-8 intellicor-transition"
-              >
+              <Button size="lg" variant="outline" className="text-lg px-8 intellicor-transition">
                 Falar com Especialista
               </Button>
             </div>
@@ -367,6 +282,5 @@ export default function SaasLanding() {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 }
