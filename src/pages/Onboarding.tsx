@@ -106,7 +106,7 @@ export default function Onboarding() {
       if (orgError) throw orgError;
 
       // 3. Criar profile do admin
-      const { error: profileError } = await supabase
+      const { data: profileData, error: profileError } = await supabase
         .from('profiles')
         .insert({
           id: authData.user.id,
@@ -114,9 +114,16 @@ export default function Onboarding() {
           name: data.adminName,
           email: data.adminEmail,
           role: 'admin',
-        });
+        })
+        .select()
+        .single();
 
-      if (profileError) throw profileError;
+      if (profileError) {
+        console.error('Profile creation error:', profileError);
+        throw new Error(`Erro ao criar perfil: ${profileError.message}`);
+      }
+
+      console.log('Profile criado:', profileData);
 
       // 4. Upload logo se fornecido
       if (logoFile) {
@@ -142,10 +149,13 @@ export default function Onboarding() {
 
       toast({
         title: "Organização criada com sucesso!",
-        description: "Verifique seu email para confirmar a conta.",
+        description: "Redirecionando para o painel administrativo...",
       });
 
-      navigate('/onboarding/success');
+      // Redirecionar para o dashboard admin após pequeno delay
+      setTimeout(() => {
+        navigate('/admin/dashboard');
+      }, 1500);
     } catch (error: any) {
       toast({
         title: "Erro no cadastro",
