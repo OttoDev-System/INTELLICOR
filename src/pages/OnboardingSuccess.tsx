@@ -5,11 +5,9 @@ import { Logo } from '@/components/ui/logo';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Rocket, Users, Globe, BarChart3, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
 export default function OnboardingSuccess() {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress(prev => {
@@ -20,33 +18,25 @@ export default function OnboardingSuccess() {
         return prev + 20;
       });
     }, 500);
-
     return () => clearInterval(interval);
   }, []);
-
-  const nextSteps = [
-    {
-      icon: Users,
-      title: 'Cadastrar Primeiro Corretor',
-      description: 'Adicione corretores à sua equipe',
-      completed: false
-    },
-    {
-      icon: Globe,
-      title: 'Personalizar Landing Page',
-      description: 'Configure sua página de captação',
-      completed: false
-    },
-    {
-      icon: BarChart3,
-      title: 'Configurar Dashboards',
-      description: 'Personalize seus relatórios',
-      completed: false
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+  const nextSteps = [{
+    icon: Users,
+    title: 'Cadastrar Primeiro Corretor',
+    description: 'Adicione corretores à sua equipe',
+    completed: false
+  }, {
+    icon: Globe,
+    title: 'Personalizar Landing Page',
+    description: 'Configure sua página de captação',
+    completed: false
+  }, {
+    icon: BarChart3,
+    title: 'Configurar Dashboards',
+    description: 'Personalize seus relatórios',
+    completed: false
+  }];
+  return <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-2xl text-center">
         {/* Success Animation */}
         <div className="mb-8">
@@ -57,9 +47,7 @@ export default function OnboardingSuccess() {
           <Logo className="justify-center mb-4" size="lg" />
           
           <div className="space-y-2">
-            <Badge variant="secondary" className="px-4 py-2">
-              🎉 Configuração Concluída!
-            </Badge>
+            
             <h1 className="text-4xl font-bold text-primary">
               Bem-vindo ao INTELLICOR!
             </h1>
@@ -116,8 +104,7 @@ export default function OnboardingSuccess() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {nextSteps.map((step, index) => (
-                <div key={index} className="flex items-center gap-4 p-3 rounded-lg border">
+              {nextSteps.map((step, index) => <div key={index} className="flex items-center gap-4 p-3 rounded-lg border">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                     <step.icon className="h-5 w-5 text-primary" />
                   </div>
@@ -128,19 +115,14 @@ export default function OnboardingSuccess() {
                   <Button variant="ghost" size="sm">
                     <ArrowRight className="h-4 w-4" />
                   </Button>
-                </div>
-              ))}
+                </div>)}
             </div>
           </CardContent>
         </Card>
 
         {/* CTA Buttons */}
         <div className="space-y-4">
-          <Button 
-            size="lg" 
-            className="intellicor-gradient text-lg px-8 h-12 w-full max-w-md"
-            onClick={() => navigate('/admin')}
-          >
+          <Button size="lg" className="intellicor-gradient text-lg px-8 h-12 w-full max-w-md" onClick={() => navigate('/admin')}>
             <Rocket className="mr-2 h-5 w-5" />
             Acessar Dashboard Administrativo
           </Button>
@@ -169,6 +151,5 @@ export default function OnboardingSuccess() {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }
